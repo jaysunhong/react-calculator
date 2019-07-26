@@ -1,0 +1,14 @@
+.display {
+    background-color: black;
+    color: yellow;
+    height: 20vh;
+    width: 100vw;
+    margin-bottom: 10%;
+    display: flex;
+    justify-content: flex-end;
+}
+.inputs {
+    margin-right: 10px;
+    font-size: 200%;
+    text-align: right;
+}
