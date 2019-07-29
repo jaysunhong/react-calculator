@@ -6,7 +6,10 @@ export default class Display extends Component {
     render() {
         return (
             <Box className="display">
-                <div className="inputs">
+                <div className="inputs" value={this.props.buttonPressed} onChange={this.props.onChange}>
+                    {this.props.buttonPressed}
+                </div>
+                <div className='total'>
                     {this.props.display}
                 </div>
             </Box>

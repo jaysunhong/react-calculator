@@ -5,10 +5,15 @@
     width: 100vw;
     margin-bottom: 10%;
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     justify-content: flex-end;
 }
 .inputs {
     margin-right: 10px;
     font-size: 200%;
-    text-align: right;
+}
+.total {
+    margin-right: 10px;
+    font-size: 200%;
 }

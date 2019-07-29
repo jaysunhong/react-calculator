@@ -12,6 +12,7 @@ class App extends Component {
       firstInputs: [],
       secondInputs: 0,
       total: 0,
+      buttonPressed: '',
     };
 
     this.onClick = this.onClick.bind(this);
@@ -30,17 +31,25 @@ class App extends Component {
     });
   }
 
+  handleChange = e => {
+    this.setState({
+      buttonPressed: e.target.value
+    })
+  }
+
   onClick = button => {
     const concatFirst = this.state.firstInputs.concat(button);
 
-    if (isNaN(button) === false) {
+    // if button pressed is a number then push input into firstInput state
+    if (isNaN(button) === false) { 
       this.setState({
-        firstInputs: concatFirst
+        firstInputs: concatFirst,
+        buttonPressed: button
       });
-    } else if (button === '+') {
+    } else if (button === '+' || button === '=') {
       this.addition(this.state.firstInputs.join(''));
       this.setState({
-        firstInputs: []
+        firstInputs: [],
       });
     }
   }
@@ -48,7 +57,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Display display={this.state.total} />
+        <Display buttonPressed={this.state.firstInputs} display={this.state.total} onChange={this.handleChange} />
         <Grid
           container
           direction="row"
