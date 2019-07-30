@@ -83,14 +83,6 @@ class App extends Component {
       firstInputs: [],
     });
   }
-  // equal = x => {
-
-  //   this.setState(prevState => ({
-  //     trackOperator: prevState.trackOperator,
-  //   }));
-
-  //   console.log(this.state.trackOperator);
-  // }
 
   onClick = button => {
     const concatFirst = this.state.firstInputs.concat(button);
@@ -128,17 +120,18 @@ class App extends Component {
           total: 0,
         });
       } else if (button === '=') {
-          const trackOperator = this.state.trackOperator;
+        const trackOperator = this.state.trackOperator;
 
-          if (trackOperator === '+') {
-            this.addition(this.state.firstInputs.join(''));
-          } else if (trackOperator === '-') {
-            this.subtraction(this.state.firstInputs.join(''));
-          } else if (trackOperator === '*') {
-            this.multiplication(this.state.firstInputs.join(''));
-          } else if (trackOperator === '/') {
-            this.division(this.state.firstInputs.join(''));
-          }
+        if (trackOperator === '+') {
+          this.addition(this.state.firstInputs.join(''));
+        } else if (trackOperator === '-') {
+          this.subtraction(this.state.firstInputs.join(''));
+        } else if (trackOperator === '*') {
+          this.multiplication(this.state.firstInputs.join(''));
+        } else if (trackOperator === '/') {
+          this.division(this.state.firstInputs.join(''));
+        }
+
         this.setState({
           firstInputs: [],
         });
