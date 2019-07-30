@@ -6,11 +6,11 @@ export default class Display extends Component {
     render() {
         return (
             <Box className="display">
-                <div className="inputs" value={this.props.buttonPressed} onChange={this.props.onChange}>
-                    {this.props.buttonPressed}
+                <div className="inputs">
+                    {this.props.buttonPressed.length <= 0 ? 0 : this.props.buttonPressed}
                 </div>
                 <div className='total'>
-                    {this.props.display}
+                    {this.props.total}
                 </div>
             </Box>
         )

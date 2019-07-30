@@ -3,5 +3,8 @@
     color: yellow !important;
 }
 #button0 {
-    width: 100% !important;
+    width: 100%;
+}
+#buttonAC {
+    width: 100%;
 }

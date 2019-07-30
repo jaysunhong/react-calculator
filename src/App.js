@@ -5,59 +5,117 @@ import Buttons from './components/Buttons/Buttons';
 import Display from './components/Display/Display';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state={
       firstInputs: [],
-      secondInputs: 0,
       total: 0,
-      buttonPressed: '',
     };
 
     this.onClick = this.onClick.bind(this);
     this.addition = this.addition.bind(this);
+    this.subtraction = this.subtraction.bind(this);
+    this.multiplication = this.multiplication.bind(this);
+    this.division = this.division.bind(this);
   }
 
   addition = x => {
-    let result = this.state.secondInputs;
-    let convertX = parseInt(x);
+    let result = this.state.total;
+    const convertX = parseInt(x);
 
     result += convertX;
 
     this.setState({
-      secondInputs: result,
-      total: result
+      total: result,
+      firstInputs: [],
     });
   }
+  subtraction = x => {
+    let result = this.state.total;
+    const convertX = parseInt(x);
 
-  handleChange = e => {
+    if (result === 0) {
+      result = convertX;
+    } else {
+      result -= convertX;
+    }
+
     this.setState({
-      buttonPressed: e.target.value
-    })
+      total: result,
+      firstInputs: [],
+    });
+
+    // const convertX = parseInt(x);
+
+    // this.setState(prevState => ({
+    //   total: convertX - prevState.total,
+    // }));
+  }
+  multiplication = x => {
+    let result = this.state.total;
+    const convertX = parseInt(x);
+
+    if (result === 0) {
+      result = convertX;
+    } else {
+      result *= convertX;
+    }
+
+    this.setState({
+      total: result,
+      firstInputs: [],
+    });
+  }
+  division = x => {
+    let result = this.state.total;
+    const convertX = parseInt(x);
+
+    if (result === 0) {
+      result = convertX;
+    } else {
+      result /= convertX;
+    }
+
+    this.setState({
+      total: result,
+      firstInputs: [],
+    });
   }
 
   onClick = button => {
     const concatFirst = this.state.firstInputs.concat(button);
 
-    // if button pressed is a number then push input into firstInput state
     if (isNaN(button) === false) { 
       this.setState({
         firstInputs: concatFirst,
-        buttonPressed: button
       });
-    } else if (button === '+' || button === '=') {
-      this.addition(this.state.firstInputs.join(''));
-      this.setState({
-        firstInputs: [],
-      });
+    } else if (isNaN(button)) {
+      if (button === '+') {
+        this.addition(this.state.firstInputs.join(''));
+      } else if (button === '-') {
+        this.subtraction(this.state.firstInputs.join(''));
+      } else if (button === '*') {
+        this.multiplication(this.state.firstInputs.join(''));
+      } else if (button === '/') {
+        this.division(this.state.firstInputs.join(''));
+      } else if (button === 'ac') {
+        this.setState({
+          firstInputs: [],
+          total: 0,
+        })
+      } else if (button === '=') {
+        this.setState({
+          firstInputs: [],
+        });
+      }
     }
   }
 
   render() {
     return (
       <div className="App">
-        <Display buttonPressed={this.state.firstInputs} display={this.state.total} onChange={this.handleChange} />
+        <Display buttonPressed={this.state.firstInputs} total={this.state.total} />
         <Grid
           container
           direction="row"
