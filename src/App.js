@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state={
       firstInputs: [],
+      trackOperator: '',
       total: 0,
     };
 
@@ -22,7 +23,7 @@ class App extends Component {
 
   addition = x => {
     let result = this.state.total;
-    const convertX = parseInt(x);
+    const convertX = parseFloat(x);
 
     result += convertX;
 
@@ -33,7 +34,7 @@ class App extends Component {
   }
   subtraction = x => {
     let result = this.state.total;
-    const convertX = parseInt(x);
+    const convertX = parseFloat(x);
 
     if (result === 0) {
       result = convertX;
@@ -46,7 +47,7 @@ class App extends Component {
       firstInputs: [],
     });
 
-    // const convertX = parseInt(x);
+    // const convertX = parseFloat(x);
 
     // this.setState(prevState => ({
     //   total: convertX - prevState.total,
@@ -54,7 +55,7 @@ class App extends Component {
   }
   multiplication = x => {
     let result = this.state.total;
-    const convertX = parseInt(x);
+    const convertX = parseFloat(x);
 
     if (result === 0) {
       result = convertX;
@@ -69,7 +70,7 @@ class App extends Component {
   }
   division = x => {
     let result = this.state.total;
-    const convertX = parseInt(x);
+    const convertX = parseFloat(x);
 
     if (result === 0) {
       result = convertX;
@@ -82,6 +83,14 @@ class App extends Component {
       firstInputs: [],
     });
   }
+  // equal = x => {
+
+  //   this.setState(prevState => ({
+  //     trackOperator: prevState.trackOperator,
+  //   }));
+
+  //   console.log(this.state.trackOperator);
+  // }
 
   onClick = button => {
     const concatFirst = this.state.firstInputs.concat(button);
@@ -91,20 +100,45 @@ class App extends Component {
         firstInputs: concatFirst,
       });
     } else if (isNaN(button)) {
+
       if (button === '+') {
         this.addition(this.state.firstInputs.join(''));
+        this.setState({
+          trackOperator: button
+        });
       } else if (button === '-') {
         this.subtraction(this.state.firstInputs.join(''));
+        this.setState({
+          trackOperator: button
+        });
       } else if (button === '*') {
         this.multiplication(this.state.firstInputs.join(''));
+        this.setState({
+          trackOperator: button
+        });     
       } else if (button === '/') {
         this.division(this.state.firstInputs.join(''));
+        this.setState({
+          trackOperator: button
+        });      
       } else if (button === 'ac') {
         this.setState({
           firstInputs: [],
+          trackOperator: '',
           total: 0,
-        })
+        });
       } else if (button === '=') {
+          const trackOperator = this.state.trackOperator;
+
+          if (trackOperator === '+') {
+            this.addition(this.state.firstInputs.join(''));
+          } else if (trackOperator === '-') {
+            this.subtraction(this.state.firstInputs.join(''));
+          } else if (trackOperator === '*') {
+            this.multiplication(this.state.firstInputs.join(''));
+          } else if (trackOperator === '/') {
+            this.division(this.state.firstInputs.join(''));
+          }
         this.setState({
           firstInputs: [],
         });

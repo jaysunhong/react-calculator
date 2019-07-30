@@ -194,16 +194,16 @@ export default class Buttons extends Component {
           alignItems="center"
           spacing={3}
         >
-          <Grid item xs={6}>
+          <Grid item xs={9}>
             <Fab variant="extended" aria-label="0" value={0} onClick={this.button0} id='button0' className='buttons'>
               0
             </Fab>
           </Grid>
-          <Grid item xs={3}>
+          {/* <Grid item xs={3}>
             <Fab aria-label="." value='.' onClick={this.buttonDecimal} className='buttons'>
               .
             </Fab>
-          </Grid>
+          </Grid> */}
           <Grid item xs={3}>
             <Fab aria-label="=" value='=' onClick={this.buttonEqual} className='buttons'>
               =
