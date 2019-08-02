@@ -19,46 +19,46 @@ export default class Buttons extends Component {
   }
   // ROW: 7, 8, 9, X 
   button7 = () => {
-    this.props.onClick('7');
+    this.props.onClick(7);
   }
   button8 = () => {
-    this.props.onClick('8');
+    this.props.onClick(8);
   }
   button9 = () => {
-    this.props.onClick('9');
+    this.props.onClick(9);
   }
   buttonMultiplication = () => {
     this.props.onClick('*');
   }
   // ROW: 4, 5, 6, - 
   button4 = () => {
-    this.props.onClick('4');
+    this.props.onClick(4);
   }
   button5 = () => {
-    this.props.onClick('5');
+    this.props.onClick(5);
   }
   button6 = () => {
-    this.props.onClick('6');
+    this.props.onClick(6);
   }
   buttonSubtraction = () => {
     this.props.onClick('-');
   }
   // ROW: 1, 2, 3, + 
   button1 = () => {
-    this.props.onClick('1');
+    this.props.onClick(1);
   }
   button2 = () => {
-    this.props.onClick('2');
+    this.props.onClick(2);
   }
   button3 = () => {
-    this.props.onClick('3');
+    this.props.onClick(3);
   }
   buttonAddition = () => {
     this.props.onClick('+');
   }
   //  ROW: 0, ., =
   button0 = () => {
-    this.props.onClick('0');
+    this.props.onClick(0);
   }
   buttonDecimal = () => {
     this.props.onClick('.');

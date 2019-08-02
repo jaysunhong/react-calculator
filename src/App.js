@@ -20,18 +20,23 @@ class App extends Component {
     this.multiplication = this.multiplication.bind(this);
     this.division = this.division.bind(this);
   }
-
+  // function addition which receives a parameter of this.state.firstInputs and parses it to calculate
   addition = x => {
     let result = this.state.total;
     const convertX = parseFloat(x);
 
-    result += convertX;
+    if (result === 0) {
+      result = convertX;
+    } else {
+      result += convertX;
+    }
 
     this.setState({
       total: result,
       firstInputs: [],
     });
   }
+  // function subtraction which receives a parameter of this.state.firstInputs and parses it to calculate
   subtraction = x => {
     let result = this.state.total;
     const convertX = parseFloat(x);
@@ -53,6 +58,7 @@ class App extends Component {
     //   total: convertX - prevState.total,
     // }));
   }
+  // function multiplication which receives a parameter of this.state.firstInputs and parses it to calculate
   multiplication = x => {
     let result = this.state.total;
     const convertX = parseFloat(x);
@@ -68,6 +74,7 @@ class App extends Component {
       firstInputs: [],
     });
   }
+  // function division which receives a parameter of this.state.firstInputs and parses it to calculate
   division = x => {
     let result = this.state.total;
     const convertX = parseFloat(x);
@@ -83,7 +90,7 @@ class App extends Component {
       firstInputs: [],
     });
   }
-
+  // function onClick which receives a parameter (props) of the button clicked value
   onClick = button => {
     const concatFirst = this.state.firstInputs.concat(button);
 
@@ -92,6 +99,9 @@ class App extends Component {
         firstInputs: concatFirst,
       });
     } else if (isNaN(button)) {
+
+      // WHEN YOU CLICK AN OPERATOR, IT IS ALREADY ADDING/SUBTRACTING/MULTIPLYING/DIVIDING FROM TOTAL
+      // USE A 2ND STATE TO HOLD/WAIT FOR A 2ND INPUT BEFORE CALCULATING
 
       if (button === '+') {
         this.addition(this.state.firstInputs.join(''));
