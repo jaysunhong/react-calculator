@@ -21,6 +21,8 @@ class App extends Component {
     this.subtraction = this.subtraction.bind(this);
     this.multiplication = this.multiplication.bind(this);
     this.division = this.division.bind(this);
+    this.handleEqual = this.handleEqual.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
   // function addition which receives a parameter of this.state.firstInputs and parses it to calculate
   addition = x => {
@@ -45,7 +47,7 @@ class App extends Component {
         equalOperator: false,
         firstInputs: [],
         secondInput: true,
-      })
+      });
     }
   }
   // function subtraction which receives a parameter of this.state.firstInputs and parses it to calculate
@@ -71,7 +73,7 @@ class App extends Component {
         equalOperator: false,
         firstInputs: [],
         secondInput: true,
-      })
+      });
     }
   }
   // function multiplication which receives a parameter of this.state.firstInputs and parses it to calculate
@@ -88,7 +90,6 @@ class App extends Component {
         });
       } else if (this.state.secondInput) {
         this.setState(prevState => ({
-          secondInput: false,
           total: prevState.total * parseFirst,
           firstInputs: [],
         }));
@@ -98,7 +99,7 @@ class App extends Component {
         equalOperator: false,
         firstInputs: [],
         secondInput: true,
-      })
+      });
     }
   }
   // function division which receives a parameter of this.state.firstInputs and parses it to calculate
@@ -115,7 +116,6 @@ class App extends Component {
         });
       } else if (this.state.secondInput) {
         this.setState(prevState => ({
-          secondInput: false,
           total: prevState.total / parseFirst,
           firstInputs: [],
         }));
@@ -125,50 +125,55 @@ class App extends Component {
         equalOperator: false,
         firstInputs: [],
         secondInput: true,
-      })
+      });
     }
   }
 
+  handleReset() {
+    this.setState({
+      firstInputs: [],
+      secondInput: false,
+      trackOperator: '',
+      total: 0,
+    });
+  }
+  
+  handleEqual() {
+    this.setState({
+      equalOperator: true,
+    });
+
+    switch (this.state.trackOperator) {
+    case '+':
+      this.addition(this.state.firstInputs);   
+      break;
+    case '-':
+      this.subtraction(this.state.firstInputs);  
+      break; 
+    case '*':
+      this.multiplication(this.state.firstInputs);
+      break;
+    case '/':
+      this.division(this.state.firstInputs);
+      break;
+    default:
+      break;
+    };
+  }
 
   // function onClick which receives a parameter (props) of the button clicked value
   onClick = button => {
 
     if (isNaN(button) === false) { 
-
       const concatFirst = this.state.firstInputs.concat(button);
 
       this.setState({
         firstInputs: concatFirst,
       });
-
     } else if (button === 'ac') {
-      this.setState({
-        firstInputs: [],
-        secondInput: false,
-        trackOperator: '',
-        total: 0,
-      });
+      this.handleReset();
     } else if (button === '=') {
-      this.setState({
-        equalOperator: true,
-      });
-
-      switch (this.state.trackOperator) {
-      case '+':
-        this.addition(this.state.firstInputs);   
-        break;
-      case '-':
-        this.subtraction(this.state.firstInputs);  
-        break; 
-      case '*':
-        this.multiplication(this.state.firstInputs);
-        break;
-      case '/':
-        this.division(this.state.firstInputs);
-        break;
-      default:
-        break;
-      };
+      this.handleEqual();
     } else if (isNaN(button)) {
 
       const joinFirst = this.state.firstInputs.join('');
@@ -191,7 +196,6 @@ class App extends Component {
             secondInput: true,
           });
           break;
-
         case '-':
           this.subtraction(this.state.firstInputs);
           this.setState({
@@ -199,7 +203,6 @@ class App extends Component {
             secondInput: true,
           });
           break;
-
         case '*':
           this.multiplication(this.state.firstInputs);
           this.setState({
@@ -207,7 +210,6 @@ class App extends Component {
             secondInput: true,
           });     
           break;
-
         case '/':
           this.division(this.state.firstInputs);
           this.setState({
@@ -215,7 +217,6 @@ class App extends Component {
             secondInput: true,
           });     
           break;
-
         default:
           break;
         }
