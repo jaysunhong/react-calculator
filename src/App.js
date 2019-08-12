@@ -36,7 +36,6 @@ class App extends Component {
         });
       } else if (this.state.secondInput) {
         this.setState(prevState => ({
-          secondInput: false,
           total: prevState.total + parseFirst,
           firstInputs: [],
         }));
@@ -63,7 +62,6 @@ class App extends Component {
         });
       } else if (this.state.secondInput) {
         this.setState(prevState => ({
-          secondInput: false,
           total: prevState.total - parseFirst,
           firstInputs: [],
         }));
@@ -131,6 +129,7 @@ class App extends Component {
     }
   }
 
+
   // function onClick which receives a parameter (props) of the button clicked value
   onClick = button => {
 
@@ -142,57 +141,85 @@ class App extends Component {
         firstInputs: concatFirst,
       });
 
+    } else if (button === 'ac') {
+      this.setState({
+        firstInputs: [],
+        secondInput: false,
+        trackOperator: '',
+        total: 0,
+      });
+    } else if (button === '=') {
+      this.setState({
+        equalOperator: true,
+      });
+
+      switch (this.state.trackOperator) {
+      case '+':
+        this.addition(this.state.firstInputs);   
+        break;
+      case '-':
+        this.subtraction(this.state.firstInputs);  
+        break; 
+      case '*':
+        this.multiplication(this.state.firstInputs);
+        break;
+      case '/':
+        this.division(this.state.firstInputs);
+        break;
+      default:
+        break;
+      };
     } else if (isNaN(button)) {
 
-      if (button === '+') {
-        this.addition(this.state.firstInputs);
+      const joinFirst = this.state.firstInputs.join('');
+      const parseFirst = parseFloat(joinFirst);
+
+      if (!this.state.secondInput) {
         this.setState({
-          trackOperator: button,
           secondInput: true,
-        });
-      } else if (button === '-') {
-        this.subtraction(this.state.firstInputs);
-        this.setState({
-          trackOperator: button,
-          secondInput: true,
-        });
-      } else if (button === '*') {
-        this.multiplication(this.state.firstInputs);
-        this.setState({
-          trackOperator: button,
-          secondInput: true,
-        });     
-      } else if (button === '/') {
-        this.division(this.state.firstInputs);
-        this.setState({
-          trackOperator: button,
-          secondInput: true,
-        });      
-      } else if (button === 'ac') {
-        this.setState({
+          total: parseFirst,
           firstInputs: [],
-          secondInput: false,
-          trackOperator: '',
-          total: 0,
+          trackOperator: button
         });
-      } else if (button === '=') {
-        const trackOperator = this.state.trackOperator;
+      }
 
-        this.setState({
-          equalOperator: true,
-        }, () => console.log(this.state.firstInputs));
+      switch (this.state.trackOperator) {
+        case '+':
+          this.addition(this.state.firstInputs);
+          this.setState({
+            trackOperator: button,
+            secondInput: true,
+          });
+          break;
 
-        if (trackOperator === '+') {
-          this.addition(this.state.firstInputs);   
-        } else if (trackOperator === '-') {
-          this.subtraction(this.state.firstInputs);   
-        } else if (trackOperator === '*') {
+        case '-':
+          this.subtraction(this.state.firstInputs);
+          this.setState({
+            trackOperator: button,
+            secondInput: true,
+          });
+          break;
+
+        case '*':
           this.multiplication(this.state.firstInputs);
-        } else if (trackOperator === '/') {
+          this.setState({
+            trackOperator: button,
+            secondInput: true,
+          });     
+          break;
+
+        case '/':
           this.division(this.state.firstInputs);
+          this.setState({
+            trackOperator: button,
+            secondInput: true,
+          });     
+          break;
+
+        default:
+          break;
         }
       }
-    }
   }
 
   render() {
@@ -205,7 +232,7 @@ class App extends Component {
           justify="center"
           alignItems="center"
         >
-          <Buttons onClick={this.onClick}/>
+          <Buttons onClick={this.onClick} reset={this.handleReset} />
         </Grid>
       </div>
     );
