@@ -10,7 +10,9 @@ class App extends Component {
 
     this.state={
       firstInputs: [],
+      secondInput: false,
       trackOperator: '',
+      equalOperator: false,
       total: 0,
     };
 
@@ -22,129 +24,173 @@ class App extends Component {
   }
   // function addition which receives a parameter of this.state.firstInputs and parses it to calculate
   addition = x => {
-    let result = this.state.total;
-    const convertX = parseFloat(x);
+    const joinFirst = x.join('');
+    const parseFirst = parseFloat(joinFirst);
 
-    if (result === 0) {
-      result = convertX;
-    } else {
-      result += convertX;
+    if (!this.state.equalOperator) {
+      if (!this.state.secondInput) {
+        this.setState({
+          secondInput: true,
+          total: parseFirst,
+          firstInputs: [],
+        });
+      } else if (this.state.secondInput) {
+        this.setState(prevState => ({
+          secondInput: false,
+          total: prevState.total + parseFirst,
+          firstInputs: [],
+        }));
+      }
+    } else if (this.state.equalOperator) {
+      this.setState({
+        equalOperator: false,
+        firstInputs: [],
+        secondInput: true,
+      })
     }
-
-    this.setState({
-      total: result,
-      firstInputs: [],
-    });
   }
   // function subtraction which receives a parameter of this.state.firstInputs and parses it to calculate
   subtraction = x => {
-    let result = this.state.total;
-    const convertX = parseFloat(x);
+    const joinFirst = x.join('');
+    const parseFirst = parseFloat(joinFirst);
 
-    if (result === 0) {
-      result = convertX;
-    } else {
-      result -= convertX;
+    if (!this.state.equalOperator) {
+      if (!this.state.secondInput) {
+        this.setState({
+          secondInput: true,
+          total: parseFirst,
+          firstInputs: [],
+        });
+      } else if (this.state.secondInput) {
+        this.setState(prevState => ({
+          secondInput: false,
+          total: prevState.total - parseFirst,
+          firstInputs: [],
+        }));
+      }
+    } else if (this.state.equalOperator) {
+      this.setState({
+        equalOperator: false,
+        firstInputs: [],
+        secondInput: true,
+      })
     }
-
-    this.setState({
-      total: result,
-      firstInputs: [],
-    });
-
-    // const convertX = parseFloat(x);
-
-    // this.setState(prevState => ({
-    //   total: convertX - prevState.total,
-    // }));
   }
   // function multiplication which receives a parameter of this.state.firstInputs and parses it to calculate
   multiplication = x => {
-    let result = this.state.total;
-    const convertX = parseFloat(x);
+    const joinFirst = x.join('');
+    const parseFirst = parseFloat(joinFirst);
 
-    if (result === 0) {
-      result = convertX;
-    } else {
-      result *= convertX;
+    if (!this.state.equalOperator) {
+      if (!this.state.secondInput) {
+        this.setState({
+          secondInput: true,
+          total: parseFirst,
+          firstInputs: [],
+        });
+      } else if (this.state.secondInput) {
+        this.setState(prevState => ({
+          secondInput: false,
+          total: prevState.total * parseFirst,
+          firstInputs: [],
+        }));
+      }
+    } else if (this.state.equalOperator) {
+      this.setState({
+        equalOperator: false,
+        firstInputs: [],
+        secondInput: true,
+      })
     }
-
-    this.setState({
-      total: result,
-      firstInputs: [],
-    });
   }
   // function division which receives a parameter of this.state.firstInputs and parses it to calculate
   division = x => {
-    let result = this.state.total;
-    const convertX = parseFloat(x);
+    const joinFirst = x.join('');
+    const parseFirst = parseFloat(joinFirst);
 
-    if (result === 0) {
-      result = convertX;
-    } else {
-      result /= convertX;
+    if (!this.state.equalOperator) {
+      if (!this.state.secondInput) {
+        this.setState({
+          secondInput: true,
+          total: parseFirst,
+          firstInputs: [],
+        });
+      } else if (this.state.secondInput) {
+        this.setState(prevState => ({
+          secondInput: false,
+          total: prevState.total / parseFirst,
+          firstInputs: [],
+        }));
+      }
+    } else if (this.state.equalOperator) {
+      this.setState({
+        equalOperator: false,
+        firstInputs: [],
+        secondInput: true,
+      })
     }
-
-    this.setState({
-      total: result,
-      firstInputs: [],
-    });
   }
+
   // function onClick which receives a parameter (props) of the button clicked value
   onClick = button => {
-    const concatFirst = this.state.firstInputs.concat(button);
 
     if (isNaN(button) === false) { 
+
+      const concatFirst = this.state.firstInputs.concat(button);
+
       this.setState({
         firstInputs: concatFirst,
       });
+
     } else if (isNaN(button)) {
 
-      // WHEN YOU CLICK AN OPERATOR, IT IS ALREADY ADDING/SUBTRACTING/MULTIPLYING/DIVIDING FROM TOTAL
-      // USE A 2ND STATE TO HOLD/WAIT FOR A 2ND INPUT BEFORE CALCULATING
-
       if (button === '+') {
-        this.addition(this.state.firstInputs.join(''));
+        this.addition(this.state.firstInputs);
         this.setState({
-          trackOperator: button
+          trackOperator: button,
+          secondInput: true,
         });
       } else if (button === '-') {
-        this.subtraction(this.state.firstInputs.join(''));
+        this.subtraction(this.state.firstInputs);
         this.setState({
-          trackOperator: button
+          trackOperator: button,
+          secondInput: true,
         });
       } else if (button === '*') {
-        this.multiplication(this.state.firstInputs.join(''));
+        this.multiplication(this.state.firstInputs);
         this.setState({
-          trackOperator: button
+          trackOperator: button,
+          secondInput: true,
         });     
       } else if (button === '/') {
-        this.division(this.state.firstInputs.join(''));
+        this.division(this.state.firstInputs);
         this.setState({
-          trackOperator: button
+          trackOperator: button,
+          secondInput: true,
         });      
       } else if (button === 'ac') {
         this.setState({
           firstInputs: [],
+          secondInput: false,
           trackOperator: '',
           total: 0,
         });
       } else if (button === '=') {
         const trackOperator = this.state.trackOperator;
 
-        if (trackOperator === '+') {
-          this.addition(this.state.firstInputs.join(''));
-        } else if (trackOperator === '-') {
-          this.subtraction(this.state.firstInputs.join(''));
-        } else if (trackOperator === '*') {
-          this.multiplication(this.state.firstInputs.join(''));
-        } else if (trackOperator === '/') {
-          this.division(this.state.firstInputs.join(''));
-        }
-
         this.setState({
-          firstInputs: [],
-        });
+          equalOperator: true,
+        }, () => console.log(this.state.firstInputs));
+
+        if (trackOperator === '+') {
+          this.addition(this.state.firstInputs);   
+        } else if (trackOperator === '-') {
+          this.subtraction(this.state.firstInputs);   
+        } else if (trackOperator === '*') {
+          this.multiplication(this.state.firstInputs);
+        } else if (trackOperator === '/') {
+          this.division(this.state.firstInputs);
+        }
       }
     }
   }
