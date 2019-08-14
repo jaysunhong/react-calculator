@@ -22,7 +22,8 @@ class App extends Component {
     this.multiplication = this.multiplication.bind(this);
     this.division = this.division.bind(this);
     this.handleEqual = this.handleEqual.bind(this);
-    this.handleReset = this.handleReset.bind(this);
+    this.handleAC = this.handleAC.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
   // function addition which receives a parameter of this.state.firstInputs and parses it to calculate
   addition = x => {
@@ -129,15 +130,29 @@ class App extends Component {
     }
   }
 
-  handleReset() {
+  handleAC() {
     this.setState({
       firstInputs: [],
       secondInput: false,
       trackOperator: '',
+      equalOperator: false,
       total: 0,
     });
   }
-  
+
+  handleClear() {
+    this.setState(prevState => ({
+      firstInputs: [],
+      secondInput: prevState.secondInput,
+      trackOperator: prevState.trackOperator,
+      equalOperator: prevState.equalOperator,
+    }), () => {
+      console.log('this.state.firstInputs', this.state.firstInputs)
+      console.log('this.state.trackOperator', this.state.trackOperator)
+      console.log('this.state.total', this.state.total)
+    });
+  } 
+
   handleEqual() {
     this.setState({
       equalOperator: true,
@@ -166,12 +181,20 @@ class App extends Component {
 
     if (isNaN(button) === false) { 
       const concatFirst = this.state.firstInputs.concat(button);
-
-      this.setState({
-        firstInputs: concatFirst,
-      });
+      if (this.state.equalOperator) {
+        this.handleAC();
+        this.setState({
+          firstInputs: concatFirst,
+        });
+      } else {
+        this.setState({
+          firstInputs: concatFirst,
+        });
+      }
     } else if (button === 'ac') {
-      this.handleReset();
+      this.handleAC();
+    } else if (button === 'clear') {
+      this.handleClear();
     } else if (button === '=') {
       this.handleEqual();
     } else if (isNaN(button)) {
@@ -233,7 +256,7 @@ class App extends Component {
           justify="center"
           alignItems="center"
         >
-          <Buttons onClick={this.onClick} reset={this.handleReset} />
+          <Buttons onClick={this.onClick} />
         </Grid>
       </div>
     );

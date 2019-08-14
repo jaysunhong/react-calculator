@@ -6,5 +6,12 @@
     width: 100%;
 }
 #buttonAC {
-    width: 100%;
+    width: 115%;
+}
+#buttonClear {
+    width: 115%;
+}
+.buttons:hover {
+    background-color: yellow !important;
+    color: black !important;
 }

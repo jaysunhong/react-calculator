@@ -8,6 +8,9 @@ export default class Buttons extends Component {
   buttonAC = () => {
     this.props.onClick('ac');
   }
+  buttonClear = () => {
+    this.props.onClick('clear')
+  }
   buttonPlusMinus = () => {
     this.props.onClick('+/-');
   }
@@ -70,17 +73,22 @@ export default class Buttons extends Component {
   render() {
     return (
       <div>
-        {/* ROW: AC, +/-, %, / */}
+        {/* ROW: AC, clear, +/-, %, / */}
         <Grid
           container
           direction="row"
-          justify="center"
+          justify="space-between"
           alignItems="center"
           spacing={3}
         >
-          <Grid item xs={9}>
+          <Grid item xs={4}>
             <Fab variant="extended" aria-label="AC" onClick={this.buttonAC} id='buttonAC' className='buttons'>
               AC
+            </Fab>
+          </Grid>
+          <Grid item xs={4}>
+            <Fab variant="extended" aria-label="clear" onClick={this.buttonClear} id='buttonClear' className='buttons'>
+              C
             </Fab>
           </Grid>
           {/* <Grid item xs={3}>

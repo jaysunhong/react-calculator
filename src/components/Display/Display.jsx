@@ -7,11 +7,14 @@ export default class Display extends Component {
         return (
             <Box className="display">
                 <div className="inputs">
+                    {this.props.buttonPressed.length > 0 ? this.props.buttonPressed : this.props.total}
+                </div>
+                {/* <div className="inputs">
                     {this.props.buttonPressed.length <= 0 ? 0 : this.props.buttonPressed}
                 </div>
                 <div className='total'>
                     {this.props.total}
-                </div>
+                </div> */}
             </Box>
         )
     }
