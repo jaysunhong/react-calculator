@@ -1,5 +1,9 @@
 ## About this Calculator!
-This is a front-end based calculator for all your basic mathematical functions! Best viewed on mobile.
+This is a front-end based calculator for all your basic mathematical functions! Optimized for desktop and mobile.
+
+[Desktop Version](./public/desktop.png)
+
+[Mobile Version](./public/mobile.png)
 
 ### Languages Used
 * HTML
