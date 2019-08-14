@@ -129,7 +129,7 @@ class App extends Component {
       });
     }
   }
-
+  // function "all clear" which resets all states to the inital states
   handleAC() {
     this.setState({
       firstInputs: [],
@@ -139,7 +139,7 @@ class App extends Component {
       total: 0,
     });
   }
-
+  // function "clear" which resets the current state to the previous state
   handleClear() {
     this.setState(prevState => ({
       firstInputs: [],
@@ -174,31 +174,36 @@ class App extends Component {
 
   // function onClick which receives a parameter (props) of the button clicked value
   onClick = button => {
-
+    // do this is button clicked is a number
     if (isNaN(button) === false) { 
       const concatFirst = this.state.firstInputs.concat(button);
-      
+      // do this if button clicked is a number and is after the equal button function is clicked
       if (this.state.equalOperator) {
         this.handleAC();
         this.setState({
           firstInputs: concatFirst,
         });
+      // do this if button clicked is a number and equal button function is not clicked
       } else {
         this.setState({
           firstInputs: concatFirst,
         });
       }
+    // do this if button clicked is "all clear"
     } else if (button === 'ac') {
       this.handleAC();
+    // do this if button clicked is "clear"
     } else if (button === 'clear') {
       this.handleClear();
+    // do this if button clicked is "equal"
     } else if (button === '=') {
       this.handleEqual();
+    // do this if button clicked is not a number
     } else if (isNaN(button)) {
 
       const joinFirst = this.state.firstInputs.join('');
       const parseFirst = parseFloat(joinFirst);
-
+      // do this if button clicked is not a number and there is no second input (state)
       if (!this.state.secondInput) {
         this.setState({
           secondInput: true,
@@ -207,7 +212,7 @@ class App extends Component {
           trackOperator: button
         });
       }
-
+      // use the this.state.trackOperator to perform switch statement. cases are based on operands of the button clicked.
       switch (this.state.trackOperator) {
         case '+':
           this.addition(this.state.firstInputs);
