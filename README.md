@@ -22,3 +22,4 @@ This is a front-end based calculator for all your basic mathematical functions! 
 - [ ] Decimal
 - [ ] Percentages
 - [ ] Positive / Negative
+- [ ] Clear (C)

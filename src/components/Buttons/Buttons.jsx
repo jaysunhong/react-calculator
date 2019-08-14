@@ -81,16 +81,16 @@ export default class Buttons extends Component {
           alignItems="center"
           spacing={3}
         >
-          <Grid item xs={4}>
+          <Grid item xs={9}>
             <Fab variant="extended" aria-label="AC" onClick={this.buttonAC} id='buttonAC' className='buttons'>
               AC
             </Fab>
           </Grid>
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}>
             <Fab variant="extended" aria-label="clear" onClick={this.buttonClear} id='buttonClear' className='buttons'>
               C
             </Fab>
-          </Grid>
+          </Grid> */}
           {/* <Grid item xs={3}>
             <Fab aria-label="+/-" onClick={this.buttonPlusMinus} className='buttons'>
               +/-
