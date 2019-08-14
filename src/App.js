@@ -26,8 +26,8 @@ class App extends Component {
     this.handleClear = this.handleClear.bind(this);
   }
   // function addition which receives a parameter of this.state.firstInputs and parses it to calculate
-  addition = x => {
-    const joinFirst = x.join('');
+  addition = buttonClicked => {
+    const joinFirst = buttonClicked.join('');
     const parseFirst = parseFloat(joinFirst);
 
     if (!this.state.equalOperator) {
@@ -52,8 +52,8 @@ class App extends Component {
     }
   }
   // function subtraction which receives a parameter of this.state.firstInputs and parses it to calculate
-  subtraction = x => {
-    const joinFirst = x.join('');
+  subtraction = buttonClicked => {
+    const joinFirst = buttonClicked.join('');
     const parseFirst = parseFloat(joinFirst);
 
     if (!this.state.equalOperator) {
@@ -78,8 +78,8 @@ class App extends Component {
     }
   }
   // function multiplication which receives a parameter of this.state.firstInputs and parses it to calculate
-  multiplication = x => {
-    const joinFirst = x.join('');
+  multiplication = buttonClicked => {
+    const joinFirst = buttonClicked.join('');
     const parseFirst = parseFloat(joinFirst);
 
     if (!this.state.equalOperator) {
@@ -104,8 +104,8 @@ class App extends Component {
     }
   }
   // function division which receives a parameter of this.state.firstInputs and parses it to calculate
-  division = x => {
-    const joinFirst = x.join('');
+  division = buttonClicked => {
+    const joinFirst = buttonClicked.join('');
     const parseFirst = parseFloat(joinFirst);
 
     if (!this.state.equalOperator) {
