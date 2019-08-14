@@ -146,11 +146,7 @@ class App extends Component {
       secondInput: prevState.secondInput,
       trackOperator: prevState.trackOperator,
       equalOperator: prevState.equalOperator,
-    }), () => {
-      console.log('this.state.firstInputs', this.state.firstInputs)
-      console.log('this.state.trackOperator', this.state.trackOperator)
-      console.log('this.state.total', this.state.total)
-    });
+    }));
   } 
 
   handleEqual() {
@@ -181,6 +177,7 @@ class App extends Component {
 
     if (isNaN(button) === false) { 
       const concatFirst = this.state.firstInputs.concat(button);
+      
       if (this.state.equalOperator) {
         this.handleAC();
         this.setState({
