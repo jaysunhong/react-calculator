@@ -5,7 +5,7 @@ This is a front-end based calculator for all your basic mathematical functions! 
 ![Calculator Desktop Version](./public/desktop.png)
 
 ## Mobile Version
-![Calculator Mobile Version](./public/mobile.png=250x250)
+![Calculator Mobile Version](./public/mobile.png)
 
 ### Languages Used
 * HTML
